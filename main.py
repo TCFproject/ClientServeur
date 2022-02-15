@@ -1,12 +1,30 @@
 import socket
 
 def deroulement(d):
-    if d == 0:
+    if d == "0":
         print("Pierre")
-    elif d == 1:
+    elif d == "1":
         print("papier")
-    elif d == 2:
+    elif d == "2":
         print("ciseaux")
+
+    while True:
+        Joueur1 = input("Entrez votre coup: pierre, papier, ciseaux")
+        Joueur2 = input("Entrez votre coup: pierre, papier, ciseaux")
+        if Joueur1 == Joueur2:
+        print("Egalité")
+        Egalité += 1
+        if Joueur1 == "pierre" and Joueur2 == "ciseaux":
+            print("Joueur1 a gagné")
+            Joueur1 += 1
+        elif Joueur1 == "papier" and Joueur2 == "pierre":
+            print("Joueur1 gagné")
+            Joueur += 1
+        elif Joueur1 == "ciseaux" and Joueur2 == "papier":
+            print("Joueur2 a gagné")
+            Joueur += 1
+
+
 
 def request(verb, url, value):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
