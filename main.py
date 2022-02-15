@@ -1,5 +1,13 @@
 import socket
 
+def deroulement(d):
+    if d == 0:
+        print("Pierre")
+    elif d == 1:
+        print("papier")
+    elif d == 2:
+        print("ciseaux")
+
 def request(verb, url, value):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.connect(("127.0.0.1", 5000))
@@ -11,7 +19,7 @@ def request(verb, url, value):
             s = sock.recv(4096).decode('utf-8')
             if s == '':
                 break;
-            print(s)
+            deroulement(s)
         sock.close()
 
 if __name__ == '__main__':
