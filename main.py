@@ -1,14 +1,17 @@
 import socket
 
-unChoix = 0
-unDeuxiemeChoix = 0
 def deroulement(d):
-    if d == 0:
-        print("Pierre")
-    elif d == 1:
-        print("papier")
-    elif d == 2:
-        print("ciseaux")
+    if(type(d) is int):
+        if d == 0:
+            print("Pierre")
+        elif d == 1:
+            print("papier")
+        elif d == 2:
+            print("ciseaux")
+        else:
+            print("Il faut un chiffre entre 0 et 2")
+    else:
+        print ("Ce n'est pas une réponse acceptabe")
 
 def request(verb, url, value):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
