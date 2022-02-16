@@ -1,5 +1,7 @@
 import socket
 
+unChoix = 0
+unDeuxiemeChoix = 0
 def deroulement(d):
     if d == 0:
         print("Pierre")
