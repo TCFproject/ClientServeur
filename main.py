@@ -1,4 +1,5 @@
 import socket
+Joueur
 
 def deroulement(d):
     if d == "0":
@@ -13,16 +14,28 @@ def deroulement(d):
         Joueur2 = input("Entrez votre coup: pierre, papier, ciseaux")
         if Joueur1 == Joueur2:
         print("Egalité")
-        Egalité += 1
+        egalité = egalité+ 1
         if Joueur1 == "pierre" and Joueur2 == "ciseaux":
             print("Joueur1 a gagné")
-            Joueur1 += 1
+            Joueur1 = Joueur1 + 1
         elif Joueur1 == "papier" and Joueur2 == "pierre":
             print("Joueur1 gagné")
-            Joueur += 1
+            Joueur = Jouer1 + 1
         elif Joueur1 == "ciseaux" and Joueur2 == "papier":
-            print("Joueur2 a gagné")
-            Joueur += 1
+            print("Joueur1 a gagné")
+            Joueur1 == Joueur1 + 1
+        elif Joueur1 == "pierre" and Joueur2 == "papier":
+            print("Joueur1 a gagné")
+            Joueur1 == Joueur2 + 1
+        elif Joueur1 == "papier" and Joueur2 == "ciseaux":
+            print("Joueur1 a gagné")
+            Joueur1 == Joueur2 + 1
+        elif Joueur1 == "ciseaux" and Joueur2 == "pierre":
+            print("Joueur1 a gagné")
+            Joueur1 == Joueur1 + 1
+
+
+
 
 
 
