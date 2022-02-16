@@ -1,14 +1,15 @@
 import socket
 
-unChoix = 0
-unDeuxiemeChoix = 0
 def deroulement(d):
-    if d == 0:
-        print("Pierre")
-    elif d == 1:
-        print("papier")
-    elif d == 2:
+
+    if d == "0":
+       print("Pierre")
+    elif d == "1":
+       print("papier")
+    elif d == "2":
         print("ciseaux")
+    else:
+        print("Il faut un chiffre entre 0 et 2")
 
 def request(verb, url, value):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -20,7 +21,7 @@ def request(verb, url, value):
         while True:
             s = sock.recv(4096).decode('utf-8')
             if s == '':
-                break;
+                break
             deroulement(s)
         sock.close()
 
@@ -33,4 +34,4 @@ if __name__ == '__main__':
             items = content.split('/')
             if len(items) > 1:
                 request("POST", items[0], items[1])
-                request("GET", "", "")
+                request("GET", "joueur1", "")
