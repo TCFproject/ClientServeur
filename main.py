@@ -1,37 +1,27 @@
-import socket
+from socket import socket, AF_INET, SOCK_STREAM
+from struct import pack, unpack
 
-def deroulement(d):
+PORT = 0x2BAD
+SERVER = "127.0.0.1"
 
-    if d == "0":
-       print("Pierre")
-    elif d == "1":
-       print("papier")
-    elif d == "2":
-        print("ciseaux")
-    else:
-        print("Il faut un chiffre entre 0 et 2")
-
-def request(verb, url, value):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.connect(("127.0.0.1", 5000))
-        sock.send(f"{verb} /{url} HTTP/1.1\r\n".encode())
-        sock.send("Content-Type: text/plain\r\n".encode())
-        sock.send(f"Content-Length: {len(value)}\r\n\r\n".encode())
-        sock.send(f"{value}\r\n".encode())
-        while True:
-            s = sock.recv(4096).decode('utf-8')
-            if s == '':
-                break
-            deroulement(s)
-        sock.close()
 
 if __name__ == '__main__':
-    while True:
-        content = input("Key/Text (Q to quit) :")
-        if content == ("Q" or "q"):
-            break
-        else:
-            items = content.split('/')
-            if len(items) > 1:
-                request("POST", items[0], items[1])
-                request("GET", "joueur1", "")
+    with socket(AF_INET, SOCK_STREAM) as sock:
+        sock.connect((SERVER, PORT))
+        num = unpack('!i', sock.recv(4))[0]
+        print(f"You're player {num}")
+        while True:
+            content = input("P:Pierre, F:Feuille, C:Ciseaux or Q:Quit : ").lower()
+            if content == "q":
+                break
+            elif content in ['p', 'f', 'c']:
+                sock.send(pack('?', content == 'p'))
+                is_head = unpack('?', sock.recv(1))[0]
+                score_num = unpack('!i', sock.recv(4))[0]
+                print(f"It was {'HEAD' if is_head else 'TAIL'}, here are the scores :")
+                for i in range(1, score_num+1):
+                    score = unpack('!i', sock.recv(4))[0]
+                    print(f"- Player {i}{' (you)' if i == num else ''} : {score if score>=0 else '-'}")
+            else:
+                print("Donnez un H ou un T s'il-vous-plait.")
+        sock.close()
